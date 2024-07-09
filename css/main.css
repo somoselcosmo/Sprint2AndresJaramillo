@@ -1,0 +1,61 @@
+* {
+  font-family: "asap", sans-serif;
+}
+
+#logo {
+  width: 150px;
+}
+
+.am {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.slide {
+  width: 100%;
+}
+
+.ooo {
+  -webkit-text-stroke: #000000 .7px;
+}
+
+.oo {
+  font-family: monospace;
+  -webkit-text-stroke: #ffffff .7px;
+}
+
+.card img {
+  object-fit: cover;
+}
+
+.card {
+  height: 100%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.55);
+}
+
+.aaa {
+  font-family: "Ubuntu Sans Mono";
+  font-size: 1.4rem;
+}
+
+.imgfoot {
+  width: 60%;
+  opacity: calc(0.7);
+}
+
+td {
+  height: 40px;
+}
+
+#details {
+  font-size: 1.4rem;
+  height: calc(84.9vh - 50px);
+}
+
+@media (max-width: 991px) {
+  .hola {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}
