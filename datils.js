@@ -129,8 +129,7 @@ const data = {
       name: "15K NY",
       image: "https://i.postimg.cc/zv67r65z/15kny.jpg",
       date: "2023-03-01",
-      description:
-        "We'll be raising funds for hospitals and medical care in this unique event held in The Big Apple.",
+      description: "We'll be raising funds for hospitals and medical care in this unique event held in The Big Apple.",
       category: "Race",
       place: "New York",
       capacity: 3000000,
@@ -195,112 +194,25 @@ const data = {
   ],
 };
 
-const repito =[...new Set(data.events.map((event) => event.category))];
+document.addEventListener('DOMContentLoaded', function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get('id');
+  const event = data.events.find(event => event._id === id);
 
-let categoriasSeleccionadas = [];
-function pintarCategorias(categorias) {
-  let contenedor = document.getElementById("checkbox");
-  contenedor.innerHTML = "";
-  categorias.forEach((category) => {
-    let checkbox = document.createElement("div");
-    checkbox.className = "form-check col-sm-6 col-lg-6";
-    checkbox.innerHTML = `
-      <input class="form-check-input" type="checkbox" value="" id="${category}">
-      <label class="form-check-label" for="${category}">
-        ${category}
-      </label>
-    `;
-    contenedor.appendChild(checkbox);
-  });
-  categorias.forEach((category) => {
-    document.getElementById(category).addEventListener("change", (event) => {
-    manejarCategoria(event.target.id,event.target.checked);
-    });
-  });
-  pintarTarjetas(data.events);
-}
-
-function manejarCategoria(category, checked) {
-  if (checked) {
-    categoriasSeleccionadas.push(category);
-  } else {
-    categoriasSeleccionadas = categoriasSeleccionadas.filter((c) => c !== category);
-  }
- manejarBusqueda();
-
-}
-actualizarTarjetas();
-
-function actualizarTarjetas() {
-  let eventosFiltrados = new Set();
-  if (categoriasSeleccionadas.length === 0) {
-    eventosFiltrados = new Set(data.events);
-  } else {
-    categoriasSeleccionadas.forEach((c) => {
-      data.events.filter(events => events.category === c).forEach(event => eventosFiltrados.add(event));
-    });
-}
-  pintarTarjetas([...eventosFiltrados]);
-}
-
-pintarCategorias(repito);
-
-function buscarYFiltrarEventos(textoDeBusqueda) {
-  const eventosFiltrados = data.events.filter(evento => 
-    evento.name.toLowerCase().includes(textoDeBusqueda.toLowerCase()) ||
-    evento.description.toLowerCase().includes(textoDeBusqueda.toLowerCase())
-  );
-
-  pintarTarjetas(eventosFiltrados);
-}
-
-function manejarBusqueda() {
-  const textoDeBusqueda = document.querySelector('.form-control[type="search"]').value;
-  buscarYFiltrarEventos(textoDeBusqueda);
-}
-
-document.querySelector('.form-control[type="search"]').addEventListener('input', manejarBusqueda);
-
-    function pintarTarjetas(events) {
-      let contenedor = document.getElementById("cards");
-      contenedor.innerHTML = "";
-      for (let i = 0; i < events.length; i++) {
-        let tarjeta = document.createElement("div");
-      tarjeta.className = "col-sm-6 col-md-4 col-lg-3 mb-4";
-      tarjeta.innerHTML = `
-              <div class="card">
-                <img src=${events[i].image} class="card-img-top" alt="...">
-                <div class="card-body d-flex flex-column justify-content-between">
-                  <h4 class="card-title text-center">${events[i].name}</h4>
-                  <p class="card-text"> 
-                    ${events[i].description}
-                  </p>
-                  <div class="navbar">
-                    <p class="aaa m-0 text-success-emphasis">$ ${events[i].price}</p>
-                    <a href="./Details.html?id=${events[i]._id}" class="btn bg-danger-subtle">Details</a>
-                  </div>
-                </div>
-              </div>
-            `;
-        contenedor.appendChild(tarjeta);
-      }
-    }
-  pintarTarjetas(data.events);
-
-function buscarYFiltrarEventos(textoDeBusqueda) {
-  let eventosFiltradosPorBusqueda = data.events.filter(evento => 
-    evento.name.toLowerCase().includes(textoDeBusqueda.toLowerCase()) ||
-    evento.description.toLowerCase().includes(textoDeBusqueda.toLowerCase())
-  );
-
-  let eventosFiltradosFinales;
-  if (categoriasSeleccionadas.length > 0) {
-    eventosFiltradosFinales = eventosFiltradosPorBusqueda.filter(evento => 
-      categoriasSeleccionadas.includes(evento.category)
-    );
-  } else {
-    eventosFiltradosFinales = eventosFiltradosPorBusqueda;
-  }
-
-  pintarTarjetas(eventosFiltradosFinales);
-}
+  document.getElementById('event-details').innerHTML = `
+    <h1>${event.name}</h1>
+    <div class="container" id="container-events">
+    <img src="${event.image}" alt="${event.name}">
+    <div id="cajaa">
+    <p>${event.description}</p>
+    <p>Category: ${event.category}</p>
+    <p>Place: ${event.place}</p>
+    <p>Capacity: ${event.capacity}</p>
+    <p>Assistance: ${event.assistance || 'No disponible'}</p>
+    <p>Price: $${event.price}</p>
+    <p>Date: ${event.date}</p>
+    <p>Estimate : ${event.estimate || 'No disponible'}</p>
+    </div>
+    </div>
+  `;
+});

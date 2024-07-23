@@ -261,7 +261,6 @@ function manejarBusqueda() {
 
 document.querySelector('.form-control[type="search"]').addEventListener('input', manejarBusqueda);
 
-/* */
 function pintarTarjetas(events) {
   let contenedor = document.getElementById("cards");
   contenedor.innerHTML = "";
@@ -279,7 +278,7 @@ function pintarTarjetas(events) {
           </p>
           <div class="navbar">
             <p class="aaa m-0 text-success-emphasis">$ ${events[i].price}</p>
-            <a href="./Details.html" class="btn bg-danger-subtle">Details</a>
+            <a href="./Details.html?id=${events[i]._id}" class="btn bg-danger-subtle">Details</a>
           </div>
         </div>
       </div>
@@ -290,8 +289,6 @@ contenedor.appendChild(tarjeta);
 }
 
 pintarTarjetas(data.events);
-
-/* */
 
 function buscarYFiltrarEventos(textoDeBusqueda) {
   let eventosFiltradosPorBusqueda = data.events.filter(evento => 

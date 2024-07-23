@@ -69,6 +69,35 @@ td {
   padding-left: 4rem;
 }
 
+#event-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: 30px;
+}
+
+
+#container-events {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin: 50px;
+}
+
+#event-details img {
+  width: 30%;
+  margin-bottom: 30px;
+}
+
+.main-details {
+  height: 75.3vh;
+}
+
 @media (max-width: 991px) {
   .hola {
     flex-direction: column-reverse;
