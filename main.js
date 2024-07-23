@@ -195,9 +195,75 @@ const data = {
   ],
 };
 
+const repito =[...new Set(data.events.map((event) => event.category))];
+
+let categoriasSeleccionadas = [];
+function pintarCategorias(categorias) {
+  let contenedor = document.getElementById("checkbox");
+  contenedor.innerHTML = "";
+  categorias.forEach((category) => {
+    let checkbox = document.createElement("div");
+    checkbox.className = "form-check col-sm-6 col-lg-6";
+    checkbox.innerHTML = `
+      <input class="form-check-input" type="checkbox" value="" id="${category}">
+      <label class="form-check-label" for="${category}">
+        ${category}
+      </label>
+    `;
+    contenedor.appendChild(checkbox);
+  });
+  categorias.forEach((category) => {
+    document.getElementById(category).addEventListener("change", (event) => {
+    manejarCategoria(event.target.id,event.target.checked);
+    });
+  });
+  pintarTarjetas(data.events);
+}
+
+function manejarCategoria(category, checked) {
+  if (checked) {
+    categoriasSeleccionadas.push(category);
+  } else {
+    categoriasSeleccionadas = categoriasSeleccionadas.filter((c) => c !== category);
+  }
+ manejarBusqueda();
+
+}
+actualizarTarjetas();
+
+function actualizarTarjetas() {
+  let eventosFiltrados = new Set();
+  if (categoriasSeleccionadas.length === 0) {
+    eventosFiltrados = new Set(data.events);
+  } else {
+    categoriasSeleccionadas.forEach((c) => {
+      data.events.filter(events => events.category === c).forEach(event => eventosFiltrados.add(event));
+    });
+}
+  pintarTarjetas([...eventosFiltrados]);
+}
+
+pintarCategorias(repito);
+
+function buscarYFiltrarEventos(textoDeBusqueda) {
+  const eventosFiltrados = data.events.filter(evento => 
+    evento.name.toLowerCase().includes(textoDeBusqueda.toLowerCase()) ||
+    evento.description.toLowerCase().includes(textoDeBusqueda.toLowerCase())
+  );
+
+  pintarTarjetas(eventosFiltrados);
+}
+
+function manejarBusqueda() {
+  const textoDeBusqueda = document.querySelector('.form-control[type="search"]').value;
+  buscarYFiltrarEventos(textoDeBusqueda);
+}
+
+document.querySelector('.form-control[type="search"]').addEventListener('input', manejarBusqueda);
+
 function pintarTarjetas(events) {
   let contenedor = document.getElementById("cards");
-
+  contenedor.innerHTML = "";
   for (let i = 0; i < events.length; i++) {
     let tarjeta = document.createElement("div");
   tarjeta.className = "col-sm-6 col-md-4 col-lg-3 mb-4";
@@ -221,3 +287,22 @@ function pintarTarjetas(events) {
 }
 
 pintarTarjetas(data.events);
+
+
+function buscarYFiltrarEventos(textoDeBusqueda) {
+  let eventosFiltradosPorBusqueda = data.events.filter(evento => 
+    evento.name.toLowerCase().includes(textoDeBusqueda.toLowerCase()) ||
+    evento.description.toLowerCase().includes(textoDeBusqueda.toLowerCase())
+  );
+
+  let eventosFiltradosFinales;
+  if (categoriasSeleccionadas.length > 0) {
+    eventosFiltradosFinales = eventosFiltradosPorBusqueda.filter(evento => 
+      categoriasSeleccionadas.includes(evento.category)
+    );
+  } else {
+    eventosFiltradosFinales = eventosFiltradosPorBusqueda;
+  }
+
+  pintarTarjetas(eventosFiltradosFinales);
+}

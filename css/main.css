@@ -12,6 +12,11 @@
   object-fit: cover;
 }
 
+#buss {
+  flex-direction: column-reverse;
+  justify-content: center;
+}
+
 .slide {
   width: 100%;
 }
@@ -26,12 +31,15 @@
 }
 
 .card img {
-  object-fit: cover;
+  width: 100%;
+  height: 200px;
+  object-fit: fill
 }
 
 .card {
   height: 100%;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.55);
+  object-fit: cover;
 }
 
 .aaa {
@@ -53,9 +61,21 @@ td {
   height: calc(84.9vh - 50px);
 }
 
+.hi input::placeholder {
+  opacity: 0;
+}
+
 @media (max-width: 991px) {
   .hola {
     flex-direction: column-reverse;
     align-items: center;
+  }
+
+  .hi input::placeholder {
+    opacity: 1;
+  }
+
+  #pp {
+    display: none;
   }
 }
