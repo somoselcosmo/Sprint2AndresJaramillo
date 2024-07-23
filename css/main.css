@@ -65,6 +65,10 @@ td {
   opacity: 0;
 }
 
+.form-check {
+  padding-left: 4rem;
+}
+
 @media (max-width: 991px) {
   .hola {
     flex-direction: column-reverse;

@@ -261,33 +261,37 @@ function manejarBusqueda() {
 
 document.querySelector('.form-control[type="search"]').addEventListener('input', manejarBusqueda);
 
-function pintarTarjetas(events) {
-  let contenedor = document.getElementById("cards");
-  contenedor.innerHTML = "";
-  for (let i = 0; i < events.length; i++) {
-    let tarjeta = document.createElement("div");
-  tarjeta.className = "col-sm-6 col-md-4 col-lg-3 mb-4";
-  tarjeta.innerHTML = `
-          <div class="card">
-            <img src=${events[i].image} class="card-img-top" alt="...">
-            <div class="card-body d-flex flex-column justify-content-between">
-              <h4 class="card-title text-center">${events[i].name}</h4>
-              <p class="card-text"> 
-                ${events[i].description}
-              </p>
-              <div class="navbar">
-                <p class="aaa m-0 text-success-emphasis">$ ${events[i].price}</p>
-                <a href="./Details.html" class="btn bg-danger-subtle">Details</a>
+
+/* */
+
+
+  function pintarTarjetas(events) {
+    let contenedor = document.getElementById("cards");
+    contenedor.innerHTML = "";
+    for (let i = 0; i < events.length; i++) {
+      let tarjeta = document.createElement("div");
+    tarjeta.className = "col-sm-6 col-md-4 col-lg-3 mb-4";
+    tarjeta.innerHTML = `
+            <div class="card">
+              <img src=${events[i].image} class="card-img-top" alt="...">
+              <div class="card-body d-flex flex-column justify-content-between">
+                <h4 class="card-title text-center">${events[i].name}</h4>
+                <p class="card-text"> 
+                  ${events[i].description}
+                </p>
+                <div class="navbar">
+                  <p class="aaa m-0 text-success-emphasis">$ ${events[i].price}</p>
+                  <a href="./Details.html" class="btn bg-danger-subtle">Details</a>
+                </div>
               </div>
             </div>
-          </div>
-        `;
-    contenedor.appendChild(tarjeta);
+          `;
+      contenedor.appendChild(tarjeta);
+    }
   }
-}
-
 pintarTarjetas(data.events);
 
+/* */
 
 function buscarYFiltrarEventos(textoDeBusqueda) {
   let eventosFiltradosPorBusqueda = data.events.filter(evento => 
