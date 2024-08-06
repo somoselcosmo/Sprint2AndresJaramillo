@@ -69,6 +69,10 @@ td {
   padding-left: 4rem;
 }
 
+.che {
+  margin-right: 60px;
+}
+
 #event-details {
   display: flex;
   flex-direction: column;
@@ -94,14 +98,44 @@ td {
   margin-bottom: 30px;
 }
 
-.main-details {
-  height: 75.3vh;
+#event-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: 30px;
 }
 
-@media (max-width: 991px) {
+#body {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-details {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.xd {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
   .hola {
     flex-direction: column-reverse;
     align-items: center;
+    justify-content: center;
+    width: 90%;
+
+  }
+
+  .xd {
+    justify-content: center;
   }
 
   .hi input::placeholder {
@@ -110,5 +144,22 @@ td {
 
   #pp {
     display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .xd {
+    justify-content: center;
+  }
+}
+
+
+@media (max-width: 575px) {
+  .xd {
+    justify-content: center;
+  }
+
+  .cajas {
+    width: 70%;
   }
 }
